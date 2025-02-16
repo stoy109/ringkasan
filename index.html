@@ -200,7 +200,24 @@
             object-fit: cover;
             border-radius: 15px;
         }
+        
+        .button-group {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
 
+        .see-more-btn {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            margin-top: 20px;
+        }
+        
+        .button.fade-out {
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.5s ease;
+        }
     </style>
 </head>
 <body class="dark-theme">
@@ -216,9 +233,18 @@
 
     <div class="main-container">
         <div class="content">
-            <a href="https://www.youtube.com" target="_blank">
-                <button class="button">Let's Learn</button>
-            </a>
+            <button class="button" onclick="showButtons()">Let's Learn</button>
+            <div class="button-group" id="buttonGroup">
+                <a href="https://example.com/lesson1" target="_blank">
+                    <button class="button">Lesson 1</button>
+                </a>
+                <a href="https://example.com/lesson2" target="_blank">
+                    <button class="button">Lesson 2</button>
+                </a>
+                <a href="https://example.com/more" target="_blank">
+                    <button class="button see-more-btn">See More</button>
+                </a>
+            </div>
         </div>
         <div class="see-more-wrapper" onclick="scrollToImage()">
             <span class="see-more-text">Lihat jadwal</span>
@@ -232,61 +258,75 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loaderContainer = document.querySelector('.loader-container');
-            const content = document.querySelector('.content');
-            const gradientBg = document.querySelector('.gradient-bg');
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const loaderContainer = document.querySelector('.loader-container');
+        const content = document.querySelector('.content');
+        const gradientBg = document.querySelector('.gradient-bg');
+        const style = document.createElement('style');
+
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        setTimeout(() => {
+            loaderContainer.style.opacity = '0';
             setTimeout(() => {
-                loaderContainer.style.opacity = '0';
-                setTimeout(() => {
-                    loaderContainer.style.display = 'none';
-                    gradientBg.classList.add('show-gradient');
-                    content.style.opacity = '1';
-                }, 500);
-            }, 3000);
+                loaderContainer.style.display = 'none';
+                gradientBg.classList.add('show-gradient');
+                content.style.opacity = '1';
+            }, 500);
+        }, 3000);
 
-            // Intersection Observer for image holder animation
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
+        }, { threshold: 0.1 });
+        observer.observe(document.querySelector('.image-holder'));
 
-            observer.observe(document.querySelector('.image-holder'));
-        });
-
-        function scrollToImage() {
-            document.querySelector('.image-section').scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-
-        // Smooth reveal on scroll
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             const body = document.body;
             const imageHolder = document.querySelector('.image-holder');
             const imageHolderPosition = imageHolder.getBoundingClientRect().top;
 
-            // Change background color based on scroll position
-            if (scrolled > 100) {
-                body.classList.add('scroll-bg');
-            } else {
-                body.classList.remove('scroll-bg');
-            }
+            body.classList.toggle('scroll-bg', scrolled > 100);
 
-            // Smooth reveal for image holder
             if (imageHolderPosition < window.innerHeight * 0.75) {
                 imageHolder.classList.add('visible');
             }
         });
-    </script>
+    });
+
+    function showButtons() {
+        const learnButton = document.querySelector('.content > .button');
+        const buttonGroup = document.getElementById('buttonGroup');
+
+        // Add fade-out class to trigger CSS transition
+        learnButton.classList.add('fade-out');
+
+        // Show button group after transition completes
+        setTimeout(() => {
+            buttonGroup.style.display = 'flex';
+            buttonGroup.style.animation = 'fadeIn 0.5s ease';
+        }, 500);
+    }
+
+    function scrollToImage() {
+        document.querySelector('.image-section').scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+</script>
     <div id="disqus_thread"></div>
 <script>
     /**
