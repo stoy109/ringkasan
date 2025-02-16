@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Agama Kelas 12</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+
+        /* Opening Section */
+        .opening {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            color: white;
+            transition: all 1.5s ease;
+            z-index: 1000;
+        }
+
+        .opening.hidden {
+            transform: scale(5);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .title {
+            font-size: 4em;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(255,255,255,0.3);
+            animation: fadeIn 2s ease;
+        }
+
+        /* Content Section */
+        .content {
+            padding: 50px 20px;
+            color: #333;
+            background: url('https://images.unsplash.com/photo-1531293151012-0fa5fa951d1b?auto=format&fit=crop&w=1920') center/cover;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .content.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .section {
+            background: rgba(255,255,255,0.9);
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            padding-left: 30px;
+            line-height: 1.8;
+        }
+
+        .verse {
+            font-style: italic;
+            color: #34495e;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #3498db;
+            border: none;
+            color: white;
+            border-radius: 50px;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #2980b9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5em;
+            }
+
+            .content {
+                padding: 30px 10px;
+            }
+        }
+        
+        .verse {
+            font-style: italic;
+            color: #2c3e50;
+            margin: 15px 0;
+            padding-left: 20px;
+            border-left: 3px solid #3498db;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="opening">
+        <button onclick="startPresentation()">Start</button>
+    </div>
+
+<div class="content">
+    <div class="section">
+        <h1>Rangkuman Presentasi Agama Kelas 12</h1>
+
+        <h2>Dasar-Dasar Worldview</h2>
+        <ul>
+            <li>Worldview secara literal berarti "a way of seeing" (cara pandang)</li>
+            <li>Mengevaluasi worldview dilakukan dengan peta realita kita</li>
+            <li>"The unexamined life is not worth living" - Socrates</li>
+        </ul>
+
+        <h2>Ayat-Ayat Alkitab Penting</h2>
+        <div class="verse">"Takut akan Tuhan adalah permulaan hikmat, dan mengenal Yang Maha Kudus adalah pengertian" (Amsal 9:10)</div>
+        <div class="verse">"Kuduskanlah Mereka kepada kebenaran, firmanMu adalah kebenaran" (Yohanes 17:17)</div>
+        <div class="verse">"Sebab apa yang tidak nampak dari pada-Nya, yaitu kekuatan-Nya yang kekal dan keilahian-Nya, dapat nampak kepada pikiran dari karya-Nya sejak dunia diciptakan, sehingga mereka tidak dapat berdalih." (Roma 1:20)</div>
+        <div class="verse">"Yaitu orang-orang yang tidak percaya, yang pikirannya telah dibutakan oleh ilah zaman ini, sehingga mereka tidak melihat cahaya Injil tentang kemuliaan Kristus, yang adalah gambaran Allah." (2 Korintus 4:4)</div>
+        <div class="verse">"Takut akan Tuhan adalah permulaan pengetahuan, tetapi orang bodoh menghina hikmat dan didikan" (Amsal 1:7)</div>
+
+        <h2>Jenis-Jenis Wahyu</h2>
+        <ul>
+            <li>General Revelation: Pengetahuan yang datang melalui pekerjaan penciptaan-Nya</li>
+            <li>Special Revelation: Pengetahuan mendalam tentang kehidupan melalui Alkitab dan inkarnasi</li>
+        </ul>
+
+        <h2>Pandangan-Pandangan Dunia (Worldviews)</h2>
+
+        <h3>Naturalisme</h3>
+        <ul>
+            <li>Menolak alam supranatural</li>
+            <li>Memandang Allah, surga, malaikat, dan mukjizat sebagai ilusi</li>
+            <li>Berpusat pada manusia (human-centered)</li>
+            <li>Berdasarkan pada teori evolusi</li>
+        </ul>
+
+        <h3>Theisme</h3>
+        <ul>
+            <li>Allah tidak terbatas, kekal, dan kudus</li>
+            <li>Transcendent: Allah ada di balik alam semesta</li>
+            <li>Immanent: Allah berperan aktif dalam alam semesta</li>
+            <li>Dianut oleh Kristen, Islam, dan Yahudi</li>
+        </ul>
+
+        <h3>Panteisme</h3>
+        <ul>
+            <li>Percaya pada banyak Allah</li>
+            <li>Berdasarkan falsafah monisme</li>
+            <li>Berpusat pada alam (nature-centered)</li>
+            <li>Sistem karma sebagai kontrol</li>
+        </ul>
+
+        <h3>Polytheisme</h3>
+        <ul>
+            <li>Mengajarkan adanya banyak kekuatan natural atau spiritual</li>
+            <li>Mencakup kekuatan alam dan dunia gaib</li>
+        </ul>
+
+        <h2>Sikap Terhadap Agama</h2>
+        <ul>
+            <li>Syncretism: Pencampuran kepercayaan berbagai agama</li>
+            <li>Fundamentalism: Penekanan keunikan satu agama</li>
+            <li>Exclusivisme: Keselamatan hanya melalui Yesus Kristus</li>
+            <li>Inclusivisme: Kekristenan unik, tapi keselamatan bisa melalui agama lain</li>
+            <li>Pluralisme: Semua agama setara</li>
+            <li>Atheisme: Menolak semua agama</li>
+        </ul>
+
+        <h2>Tindakan Allah</h2>
+        <ul>
+            <li>God Condemn: Menghukum</li>
+            <li>God Condone: Mengampuni</li>
+            <li>God Atone: Menebus</li>
+        </ul>
+
+        <h2>Strategi Setan (Berdasarkan Wahyu 12:7-9)</h2>
+        <ul>
+            <li>Doubt (Menantang Kenyataan): Mempertanyakan pemerintahan Allah</li>
+            <li>Presumption (Kelancangan): Menciptakan alternatif tandingan</li>
+            <li>Independence (Kebebasan): Memisahkan diri dari Allah</li>
+        </ul>
+        <div class="verse">Dusta utama setan kepada manusia di Taman Eden: "Sekali-kali kamu tidak akan mati"</div>
+    </div>
+</div>
+
+
+    <script>
+        function startPresentation() {
+            const opening = document.querySelector('.opening');
+            const content = document.querySelector('.content');
+
+            opening.classList.add('hidden');
+            setTimeout(() => {
+                content.classList.add('visible');
+            }, 800);
+        }
+         startPresentation();
+    </script>
+</body>
+</html>
+
