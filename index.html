@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improved Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 200vh;
+            background: #f0f0f0;
+            transition: background-color 0.5s ease;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .loader-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f0f0f0;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        .wave {
+            width: 5px;
+            height: 100px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            margin: 10px;
+            animation: wave 1s linear infinite;
+            border-radius: 20px;
+        }
+
+        .wave:nth-child(2) { animation-delay: 0.1s; }
+        .wave:nth-child(3) { animation-delay: 0.2s; }
+        .wave:nth-child(4) { animation-delay: 0.3s; }
+        .wave:nth-child(5) { animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0% { transform: scale(0); }
+            50% { transform: scale(1); }
+            100% { transform: scale(0); }
+        }
+
+        .content {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            color: white;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-theme {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #1a1a1a, #2c3e50);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .show-gradient {
+            opacity: 1;
+        }
+
+        .scroll-bg {
+            background: linear-gradient(45deg, #1a1a1a, #2c3e50, #34495e, #2c3e50, #1a1a1a);
+        }
+
+        .see-more-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            animation: bounce 1.5s infinite;
+            position: absolute;
+            bottom: 50px;
+        }
+
+        .see-more-text {
+            font-size: 16px;
+            color: white;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .arrow-down {
+            width: 12px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            transform: rotate(45deg);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        .image-section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .image-holder {
+            width: 80%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.2em;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .image-holder.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .image-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="loader-container">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <div class="gradient-bg"></div>
+
+    <div class="main-container">
+        <div class="content">
+            <button class="button">Let's Learn</button>
+        </div>
+        <div class="see-more-wrapper" onclick="scrollToImage()">
+            <span class="see-more-text">Lihat jadwal</span>
+            <div class="arrow-down"></div>
+        </div>
+    </div>
+
+    <div class="image-section">
+        <div class="image-holder">
+            <img src="https://via.placeholder.com/800x450" alt="Jadwal">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loaderContainer = document.querySelector('.loader-container');
+            const content = document.querySelector('.content');
+            const gradientBg = document.querySelector('.gradient-bg');
+
+            setTimeout(() => {
+                loaderContainer.style.opacity = '0';
+                setTimeout(() => {
+                    loaderContainer.style.display = 'none';
+                    gradientBg.classList.add('show-gradient');
+                    content.style.opacity = '1';
+                }, 500);
+            }, 3000);
+
+            // Intersection Observer for image holder animation
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            observer.observe(document.querySelector('.image-holder'));
+        });
+
+        function scrollToImage() {
+            document.querySelector('.image-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth reveal on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const body = document.body;
+            const imageHolder = document.querySelector('.image-holder');
+            const imageHolderPosition = imageHolder.getBoundingClientRect().top;
+
+            // Change background color based on scroll position
+            if (scrolled > 100) {
+                body.classList.add('scroll-bg');
+            } else {
+                body.classList.remove('scroll-bg');
+            }
+
+            // Smooth reveal for image holder
+            if (imageHolderPosition < window.innerHeight * 0.75) {
+                imageHolder.classList.add('visible');
+            }
+        });
+    </script>
+</body>
+</html>
