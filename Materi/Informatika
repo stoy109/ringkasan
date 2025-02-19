@@ -138,7 +138,7 @@
 <body>
     <div class="particles"></div>
     <div class="container">
-        <button class="btn from-left" onclick="window.location.href='./soaljawab.pdf'">Soal + Jawaban</button>
+        <button class="btn from-left" onclick="window.location.href='./Materi/7730499e-9cf9-47aa-8c44-c07de78ef5e7.pdf'">Soal + Jawaban</button>
         <button class="btn from-left" onclick="window.location.href='https://quizizz.com/join/quiz/67b5c1a45db197b9d5f4317b/start?studentShare=true'">Latihan 80 soal ajf wtf</button>
     </div>
 
